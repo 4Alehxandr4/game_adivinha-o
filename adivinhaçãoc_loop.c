@@ -1,5 +1,9 @@
 #include <stdio.h>
 // Inclui a biblioteca padrão de entrda e saída 
+#include <stdlib.h>
+// Local a onde a função abs está incluida 
+#include <time.h>
+// Local a onde trata função de tempo
 int main() {
     // função principal, onde o programa começa a rodar  
     printf("______________________________________\n");
@@ -7,10 +11,17 @@ int main() {
     printf("Bem-vindo ao nosso jogo de adivinhacao loop infinito\n");
     printf("______________________________________\n");
 
-        int num_secreto = 19; // num secreto a ser adivinhado
+        int segundos = time(0); 
+        srand(segundos); 
+        // essas duas funções acima, garante que o número gerado seja diferente a cada vez que o programa é executado
+
+        int num_grande = rand(); // gera números aleatórios 
+
+        int num_secreto = num_grande % 100; // o num segreto é o resto da divisão do num alaeatório, 
+                                            //  assim o num secreto sempre vai ser um num entre 0 e 99
         int chute; // chute do usuário 
         int tentativa = 0; // guarda o num de tentativas 
-        double pontos = 10; // total de pontos 
+        double pontos = 100; // total de pontos 
         // double é uma variável que guardar números com casas decimais 
 
         while(1) {
@@ -30,8 +41,10 @@ int main() {
          int acertou = (chute == num_secreto); 
          int maior = chute > num_secreto;
 
+         tentativa++; // soma o num de tentativas 
+
         // Estrutura condicional 
-         if (acertou) { // essa declaração de variável só funciona porque ela está dentro do escopo for 
+        if (acertou) { // essa declaração de variável só funciona porque ela está dentro do escopo for 
             printf("Parabens! Voce acertou.\n "); 
             break; // Utilizado para encerrar o código, quando o bloco de código no meio do loop for verdadeira
         }
@@ -39,14 +52,14 @@ int main() {
         else if (maior){
             printf("Dica: O seu chute foi maior que o numero secreto, tente um numero menor \n");
         }
+
         else {
                 printf("Dica: O seu chute foi menor que o numero secreto, tente um numero maior\n");
             }
 
-            tentativa++; // soma o num de tentativas 
-
             // calculo da pontuação
-            double pontos_perdidos = (chute - num_secreto)/2.0;
+            double pontos_perdidos = abs (chute - num_secreto)/2.0;
+            // função abs, que conver números negativos em positivos
             pontos = pontos - pontos_perdidos;  
     } 
     printf("Fim de jogo!!!! \n"); 
