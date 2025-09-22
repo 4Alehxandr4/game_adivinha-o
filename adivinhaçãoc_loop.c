@@ -6,10 +6,10 @@
 // Local a onde trata função de tempo
 int main() {
     // função principal, onde o programa começa a rodar  
-    printf("______________________________________\n");
     printf("\n");
+    printf("=^..^= =^..^= =^..^= =^..^= =^..^= =^..^= =^..^==^..^= =^..^= \n");
     printf("Bem-vindo ao nosso jogo de adivinhacao loop infinito\n");
-    printf("______________________________________\n");
+    printf("..............................................................\n");
 
         int segundos = time(0); 
         srand(segundos); 
@@ -24,7 +24,27 @@ int main() {
         double pontos = 100; // total de pontos 
         // double é uma variável que guardar números com casas decimais 
 
-        while(1) {
+        int acertou = 0; 
+
+        int nivel;
+        printf("Qual o nivel de dificuldade?\n");
+        printf("(1) Facil (2) Medio (3) Dificil\n\n");
+        printf("Escolha: ");
+        scanf("%d", &nivel);
+
+         int num_tentativas;
+
+         if(nivel == 1) {
+            num_tentativas = 20;
+        }
+         else if (nivel == 2) {
+        num_tentativas = 15;
+    }
+    else {
+        num_tentativas = 6;
+    }
+
+        for (int i = 1; i <= num_tentativas; i++) {
             printf("Tentativa %d\n", tentativa+1); // soma o num de tentativas para aparecer no terminal 
             printf("Qual e o seu chute do numero magico? ");
             scanf("%d", &chute); // %d se refere a um número inteiro 
@@ -38,14 +58,13 @@ int main() {
             continue; // utilizado quando queremos continuar o loop 
         }
 
-         int acertou = (chute == num_secreto); 
+         acertou = (chute == num_secreto); 
          int maior = chute > num_secreto;
 
          tentativa++; // soma o num de tentativas 
 
         // Estrutura condicional 
-        if (acertou) { // essa declaração de variável só funciona porque ela está dentro do escopo for 
-            printf("Parabens! Voce acertou.\n "); 
+        if (acertou) { 
             break; // Utilizado para encerrar o código, quando o bloco de código no meio do loop for verdadeira
         }
         
@@ -63,6 +82,23 @@ int main() {
             pontos = pontos - pontos_perdidos;  
     } 
     printf("Fim de jogo!!!! \n"); 
-    printf("Voce acertou em %d tentativas.\n", tentativa);
-    printf("Total de pontos %2.f", pontos); //%f faz referência a num decimais e 1. indica as casas decimais 
+
+    if (acertou) {
+        printf("Voce acertou em %d tentativas.\n", tentativa);
+        printf(" /\\_/\\ (\n");
+        printf(" ( ^.^ ) _) \n");
+        printf(" \"/ (\n");
+        printf(" ( | | )\n");
+        printf(" (__d b__)\n");
+        printf("Total de pontos %2.f", pontos); //%f faz referência a num decimais e 1. indica as casas decimais 
+    }
+
+    else  {
+        printf("Voce perdeu! Tente de novo!\n");
+        printf("              /)     \n");
+        printf("      /\\___/\\ ((   \n");
+        printf("      \\`@_@'/ ))    \n");
+        printf("      {_:Y:.}_//     \n");
+        printf("      {_}^-'{_}      \n");
+    }
 }
